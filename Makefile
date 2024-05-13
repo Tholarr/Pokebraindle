@@ -6,7 +6,8 @@
 ##
 NAME = pokebraindle
 
-SRC = 	src/Main.cpp
+SRC = 	src/Main.cpp 			\
+		src/Interface.cpp 		\
 
 OBJ = $(SRC:.cpp=.o)
 
@@ -14,7 +15,7 @@ all: Ct.hpp $(NAME)
 
 $(NAME): $(OBJ)
 	mv -f Ct.hpp src/include/
-	g++ -o $@ $^ -lX11
+	g++ -o $@ $^ -lX11 -lncurses
 	rm -f $(OBJ)
 	@printf "[\033[0;31mdeleted\033[0m] % 30s\n" $(OBJ) | tr ' ' '.'
 	@printf "[\033[0;36mbuilt\033[0m] % 32s\n" $(NAME) | tr ' ' '.'
