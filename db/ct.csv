@@ -1,0 +1,50 @@
+CT01,"Ultimapoing","Normal",80,85
+CT02,"Coupe-Vent","Normal",80,100
+CT03,"Danse-Lames","Normal",-1,-1
+CT04,"Cyclone","Normal",-1,100
+CT05,"Ultimawashi","Normal",-1,100
+CT06,"Toxik","Poison",-1,85
+CT07,"Empal'Korne","Normal",-1,30
+CT08,"Plaquage","Normal",85,100
+CT09,"Bélier","Normal",90,85
+CT10,"Damoclès","Normal",100,100
+CT11,"Bulles d'O","Eau",65,100
+CT12,"Pistolet à O","Eau",40,100
+CT13,"Laser Glace","Glace",95,100
+CT14,"Blizzard","Glace",120,90
+CT15,"Ultralaser","Normal",150,90
+CT16,"Jackpot","Normal",40,100
+CT17,"Sacrifice","Combat",80,80
+CT18,"Riposte","Combat",-1,100
+CT19,"Frappe Atlas","Combat",-1,100
+CT20,"Frénésie","Normal",20,100
+CT21,"Méga-Sangsue","Plante",40,100
+CT22,"Lance-Soleil","Plante",120,100
+CT23,"Draco-Rage","Poison",-1,100
+CT24,"Tonnerre","Electrique",95,100
+CT25,"Fatal-Foudre","Electrique",95,100
+CT26,"Séisme","Sol",100,100
+CT27,"Abîme","Sol",-1,30
+CT28,"Tunnel","Sol",100,100
+CT29,"Psyko","Psy",90,100
+CT30,"Téléport","Psy",-1,-1
+CT31,"Copie","Normal",-1,-1
+CT32,"Reflet","Normal",-1,-1
+CT33,"Protection","Psy",-1,-1
+CT34,"Patience","Normal",-1,-1
+CT35,"Métronome","Normal",-1,-1
+CT36,"Destruction","Normal",130,100
+CT37,"Bomb'Oeuf","Normal",100,75
+CT38,"Déflagration","Feu",120,85
+CT39,"Météores","Normal",60,-1
+CT40,"Coud'Krâne","Normal",100,100
+CT41,"E-Coque","Normal",-1,-1
+CT42,"Dévorêve","Psy",100,100
+CT43,"Piqué","Vol",140,90
+CT44,"Repos","Psy",-1,-1
+CT45,"Cage-Eclair","Electrique",-1,100
+CT46,"Vague Psy","Psy",-1,80
+CT47,"Explosion","Normal",170,100
+CT48,"Eboulement","Roche",75,90
+CT49,"Triplattaque","Normal",80,100
+CT50,"Clonage","Normal",-1,-1
