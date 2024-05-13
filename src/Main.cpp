@@ -12,8 +12,10 @@ int main()
 
     while(1) {
         data.print_title(-4);
+        if (data._inMenu)
+            data.print_menu();
         refresh();
-        // getch();
+        data.get_input();
     }
     return 0;
 }

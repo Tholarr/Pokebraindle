@@ -6,7 +6,10 @@ Interface::Interface()
     cbreak();
     noecho();
     keypad(stdscr, TRUE);
+    curs_set(0);
     getmaxyx(stdscr, _screenY, _screenX);
+    _cursor = 0;
+    _inMenu = true;
 }
 
 Interface::~Interface()
@@ -17,21 +20,68 @@ Interface::~Interface()
 
 void Interface::print_title(int y)
 {
-    start_color();
-    init_pair(1, COLOR_RED, COLOR_BLACK);
-    attron(COLOR_PAIR(1));
+    const std::vector<std::string> title_lines = {
+        "   ___      _        _               _           _ _      ",
+        "  / _ \\___ | | _____| |__  _ __ __ _(_)_ __   __| | | ___ ",
+        " / /_)/ _ \\| |/ / _ \\ '_ \\| '__/ _` | | '_ \\ / _` | |/ _ \\",
+        "/ ___/ (_) |   <  __/ |_) | | | (_| | | | | | (_| | |  __/",
+        "\\/    \\___/|_|\\_\\___|_.__/|_|  \\__,_|_|_| |_|\\__,_|_|\\___|"
+    };
+    getmaxyx(stdscr, _screenY, _screenX);
+    int start_x = (_screenX - title_lines[0].length()) / 2;
+    int start_y = _screenY / 2 - title_lines.size() / 2 - (title_lines.size() + 2);
 
-    std::string message1 = "   ___      _        _               _           _ _      ";
-    std::string message2 = "  / _ \\___ | | _____| |__  _ __ __ _(_)_ __   __| | | ___ ";
-    std::string message3 = " / /_)/ _ \\| |/ / _ \\ '_ \\| '__/ _` | | '_ \\ / _` | |/ _ \\";
-    std::string message4 = "/ ___/ (_) |   <  __/ |_) | | | (_| | | | | | (_| | |  __/";
-    std::string message5 = "\\/    \\___/|_|\\_\\___|_.__/|_|  \\__,_|_|_| |_|\\__,_|_|\\___|";
-    int message_length = message1.length();
-    int start_x = (_screenX - message_length) / 2;
-    int start_y = _screenY / 2 + y;
-    mvprintw(start_y, start_x, message1.c_str());
-    mvprintw(start_y+1, start_x, message2.c_str());
-    mvprintw(start_y+2, start_x, message3.c_str());
-    mvprintw(start_y+3, start_x, message4.c_str());
-    mvprintw(start_y+4, start_x, message5.c_str());
+    start_color();
+    init_pair(1, COLOR_WHITE, COLOR_BLACK);
+    attron(COLOR_PAIR(1));
+    for (size_t i = 0; i < title_lines.size(); ++i) {
+        mvprintw(start_y + i, start_x, title_lines[i].c_str());
+    }
+}
+
+void Interface::print_menu()
+{
+    const std::vector<std::string> title_lines = {
+        "CT",
+        "Object",
+        "Attack",
+    };
+    getmaxyx(stdscr, _screenY, _screenX);
+    int start_y = _screenY / 2 - title_lines.size() / 2;
+
+    start_color();
+    init_pair(1, COLOR_WHITE, COLOR_BLACK);
+    init_pair(2, COLOR_CYAN, COLOR_BLACK);
+    for (size_t i = 0; i < title_lines.size(); ++i) {
+        int start_x = (_screenX - title_lines[i].length()) / 2;
+        if (_cursor == i)
+            attron(COLOR_PAIR(2));
+        else
+            attron(COLOR_PAIR(1));
+        mvprintw(start_y + i, start_x, title_lines[i].c_str());
+    }
+}
+
+void Interface::get_input()
+{
+    int input = getch();
+
+    if (_inMenu) {
+        switch(input) {
+            case KEY_UP:
+                update_cursor(-1);
+                break;
+            case KEY_DOWN:
+                update_cursor(1);
+                break;
+        }
+    }
+}
+
+void Interface::update_cursor(int direction)
+{
+    if (direction == -1 && _cursor > 0)
+        _cursor--;
+    if (direction == 1 && _cursor < 2)
+        _cursor++;
 }
