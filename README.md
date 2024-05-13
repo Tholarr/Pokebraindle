@@ -1,7 +1,7 @@
 # Pokebraindle
 
 **Do you know Pokedle ?** 🤔<br>
-It's a game where you daily guess a Pokemon!
+It's a game where you daily guess a Pokemon of the first generation!
 - ❓ CLASSIC *Get clues on every try*
 - 🃏 CARD *With a blurry card*
 - 📄 DESCRIPTION *With a Pokédex sentence*
