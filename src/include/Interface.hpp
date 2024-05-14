@@ -5,8 +5,8 @@
 ** Interface
 */
 
-#ifndef CT_HPP_
-    #define CT_HPP_
+#ifndef INTERFACE_HPP_
+    #define INTERFACE_HPP_
 #include <ncurses.h>
 #include <string>
 #include <iostream>
@@ -19,20 +19,26 @@ class Interface {
         ~Interface();
         void print_title();
         void print_menu();
-        void get_input();
+        void get_input_menu();
         void update_cursor(int code);
+
         void launch_ct();
+        void get_input_ct();
+        void get_answer_ct(const std::string);
+
         void launch_obj();
         void launch_att();
 
         bool _inMenu;
         int _set;
+        int _dailyCT;
 
     protected:
         int _cursor;
         int _screenY;
         int _screenX;
+
 };
 
 
-#endif /* !CT_HPP_ */
+#endif /* !INTERFACE_HPP_ */

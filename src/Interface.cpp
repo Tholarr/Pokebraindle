@@ -22,6 +22,8 @@ Interface::Interface()
     _cursor = 0;
     _inMenu = true;
     _set = -1;
+
+    _dailyCT = 5;
 }
 
 Interface::~Interface()
@@ -69,16 +71,14 @@ void Interface::print_menu()
     }
 }
 
-void Interface::get_input()
+void Interface::get_input_menu()
 {
     int input = getch();
 
-    if (_inMenu) {
-        switch(input) {
-            case '\n': update_cursor(0); break; // "enter" key
-            case KEY_UP: update_cursor(-1); break;
-            case KEY_DOWN: update_cursor(1); break;
-        }
+    switch(input) {
+        case '\n': update_cursor(0); break; // "enter" key
+        case KEY_UP: update_cursor(-1); break;
+        case KEY_DOWN: update_cursor(1); break;
     }
 }
 

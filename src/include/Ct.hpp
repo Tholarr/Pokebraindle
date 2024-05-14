@@ -6,13 +6,12 @@
 ** Do not modify by hand.
 */
 
+#ifndef CT_HPP_
+    #define CT_HPP_
 #include <array>
 #include <string>
 #include <limits>
 #include <cstdint>
-
-#ifndef CT_HPP_
-#define CT_HPP_
 
     enum CtId {
         CT01 = 0,

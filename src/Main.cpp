@@ -14,13 +14,13 @@ int main()
         data.print_title();
         if (data._inMenu) {
             data.print_menu();
+            data.get_input_menu();
         } else {
             switch (data._set) {
                 case 0: data.launch_ct(); break;
             }
         }
         refresh();
-        data.get_input();
     }
     return 0;
 }

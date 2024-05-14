@@ -41,13 +41,12 @@ Ct.hpp: db/ct.csv
 	"description:\n** Auto-generated file that lists all available" \
 	"assets\n** Do not modify by hand.\n*/" > $@
 	@echo >> $@
+	@echo "#ifndef CT_HPP_" >> $@
+	@echo "    #define CT_HPP_" >> $@
 	@echo '#include <array>' >> $@
 	@echo '#include <string>' >> $@
 	@echo '#include <limits>' >> $@
 	@echo '#include <cstdint>' >> $@
-	@echo >> $@
-	@echo "#ifndef CT_HPP_" >> $@
-	@echo "#define CT_HPP_" >> $@
 	@echo >> $@
 	@echo '    enum CtId {' >> $@
 	@awk -F ',' '{print "        " $$1 " = " NR-1 ","}' $^ >> $@
@@ -73,4 +72,3 @@ Ct.hpp: db/ct.csv
 	@echo >> $@
 
 	@echo "#endif /* !CT_HPP_ */" >> $@
-	@chmod -w $@
