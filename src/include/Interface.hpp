@@ -11,6 +11,8 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <locale>
+#include <codecvt>
 #include "Ct.hpp"
 
 class Interface {
@@ -24,7 +26,9 @@ class Interface {
 
         void launch_ct();
         void get_input_ct();
-        void get_answer_ct(const std::string);
+        void print_suggestions_ct(const std::string guess);
+        std::string transformStr(const std::string& str);
+        void get_answer_ct(const std::string guess);
 
         void launch_obj();
         void launch_att();
