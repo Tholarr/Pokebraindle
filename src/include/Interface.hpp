@@ -17,12 +17,17 @@ class Interface {
     public:
         Interface();
         ~Interface();
-        void print_title(int y);
+        void print_title();
         void print_menu();
         void get_input();
-        void update_cursor(int direction);
+        void update_cursor(int code);
+        void launch_ct();
+        void launch_obj();
+        void launch_att();
 
         bool _inMenu;
+        int _set;
+
     protected:
         int _cursor;
         int _screenY;

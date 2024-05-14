@@ -8,6 +8,7 @@ NAME = pokebraindle
 
 SRC = 	src/Main.cpp 			\
 		src/Interface.cpp 		\
+		src/CT.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
