@@ -29,6 +29,7 @@ class Interface {
         void print_suggestions_ct(const std::string guess);
         std::string transformStr(const std::string& str);
         void get_answer_ct(const std::string guess);
+        void print_clues_ct(const int i);
 
         void launch_obj();
         void launch_att();

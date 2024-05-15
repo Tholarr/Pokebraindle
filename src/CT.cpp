@@ -118,30 +118,74 @@ void Interface::get_answer_ct(const std::string guess)
             break;
         }
     }
-    if (isValid) {
-        bool isCopy = false;
-        for (int j = 0; j < _nbAttemptsCT && !isCopy; j++) {
-            if (_listAttempsCT[j] == i) {
-                isCopy = true;
-                break;
-            }
+    if (isValid)
+        print_clues_ct(i);
+}
+
+void Interface::print_clues_ct(const int i)
+{
+    bool isCopy = false;
+    for (int j = 0; j < _nbAttemptsCT && !isCopy; j++) {
+        if (_listAttempsCT[j] == i) {
+            isCopy = true;
+            break;
         }
-        if (!isCopy) {
-            _nbAttemptsCT++;
-            _listAttempsCT[_nbAttemptsCT - 1] = i;
-            move(1, 0);//debug
-            clrtoeol();//debug
-            mvprintw(1, 1, ("Nuh uh " + std::to_string(_nbAttemptsCT)).c_str());//debug
-            for (int j = 0; j < _nbAttemptsCT; j++) {
-                int y = _historyY + _nbAttemptsCT;
-                int x = (_screenX / 2) - 20;
-                move(y, x);
-                clrtoeol();
-                mvprintw(y, x, "| %s", CtTypes[_listAttempsCT[j]].c_str());
-                mvprintw(y, x + 13, "| %s", std::to_string(CtPower[_listAttempsCT[j]]).c_str());
-                mvprintw(y, x + 13 + 14, "| %s", std::to_string(CtAccuracy[_listAttempsCT[j]]).c_str());
-                mvprintw(y, x + 13 + 14 + 14, "|");
+    }
+    if (!isCopy) {
+        _nbAttemptsCT++;
+        _listAttempsCT[_nbAttemptsCT - 1] = i;
+        move(1, 0);//debug
+        clrtoeol();//debug
+        mvprintw(1, 1, ("Nuh uh " + std::to_string(_nbAttemptsCT)).c_str());//debug
+        for (int j = 0; j < _nbAttemptsCT; j++) {
+            int y = _historyY + _nbAttemptsCT;
+            int x = (_screenX / 2) - 20;
+            move(y, x);
+            clrtoeol();
+            mvprintw(y, x, "| ");
+
+            // types
+            if (CtTypes[_listAttempsCT[j]] != CtTypes[_dailyCT])
+                attron(COLOR_PAIR(3));
+            else
+                attron(COLOR_PAIR(4));
+            mvprintw(y, x + 2, CtTypes[_listAttempsCT[j]].c_str());
+
+            attron(COLOR_PAIR(1));
+            mvprintw(y, x + 13, "| ");
+
+
+            // powers
+            if (CtPower[_listAttempsCT[j]] != CtPower[_dailyCT]) {
+                attron(COLOR_PAIR(3));
+                if (CtPower[_listAttempsCT[j]] < CtPower[_dailyCT])
+                    mvprintw(y, x + 13 + 12, "^");
+                else
+                    mvprintw(y, x + 13 + 12, "v");
+
+            } else {
+                attron(COLOR_PAIR(4));
             }
+            mvprintw(y, x + 15, std::to_string(CtPower[_listAttempsCT[j]]).c_str());
+
+            attron(COLOR_PAIR(1));
+            mvprintw(y, x + 13 + 14, "| ");
+
+
+            // accuracy
+            if (CtAccuracy[_listAttempsCT[j]] != CtAccuracy[_dailyCT]) {
+                attron(COLOR_PAIR(3));
+                if (CtAccuracy[_listAttempsCT[j]] < CtAccuracy[_dailyCT])
+                    mvprintw(y, x + 13 + 14 + 12, "^");
+                else
+                    mvprintw(y, x + 13 + 14 + 12, "v");
+            } else {
+                attron(COLOR_PAIR(4));
+            }
+            mvprintw(y, x + 13 + 16, std::to_string(CtAccuracy[_listAttempsCT[j]]).c_str());
+            
+            attron(COLOR_PAIR(1));
+            mvprintw(y, x + 13 + 14 + 14, "|");
         }
     }
 }
