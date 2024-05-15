@@ -120,6 +120,22 @@ void Interface::get_answer_ct(const std::string guess)
     }
     if (isValid)
         print_clues_ct(i);
+    else if (!guess.empty()) {
+        bool same;
+        for (int j = 0; j < CT_COUNT - 1; j++) {
+            same = true;
+            for (i = 0; guess[i]; i++) {
+                if (transformStr(CtNames[j])[i] != guess[i]) {
+                    same = false;
+                    break;
+                }
+            }
+            if (same) {
+                print_clues_ct(j);
+                break;
+            }
+        }
+    }
 }
 
 void Interface::print_clues_ct(const int i)
@@ -142,7 +158,7 @@ void Interface::print_clues_ct(const int i)
             int x = (_screenX / 2) - 20;
             move(y, x);
             clrtoeol();
-            mvprintw(y, x, "| ");
+            mvprintw(y, x - CtNames[_listAttempsCT[j]].size() - 2, "%s  | ", CtNames[_listAttempsCT[j]].c_str());
 
             // types
             if (CtTypes[_listAttempsCT[j]] != CtTypes[_dailyCT])
