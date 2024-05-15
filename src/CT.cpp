@@ -153,10 +153,12 @@ void Interface::print_clues_ct(const int i)
         move(1, 0);//debug
         clrtoeol();//debug
         mvprintw(1, 1, ("Nuh uh " + std::to_string(_nbAttemptsCT)).c_str());//debug
-        for (int j = 0; j < _nbAttemptsCT; j++) {
-            int y = _historyY + _nbAttemptsCT;
+        int cmp = 1;
+        for (int j = _nbAttemptsCT - 1; j >= 0; j--) {
+            int y = _historyY + cmp;
+            cmp++;
             int x = (_screenX / 2) - 20;
-            move(y, x);
+            move(y, 0);
             clrtoeol();
             mvprintw(y, x - CtNames[_listAttempsCT[j]].size() - 2, "%s  | ", CtNames[_listAttempsCT[j]].c_str());
 
