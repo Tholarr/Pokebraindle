@@ -18,6 +18,8 @@ void Interface::launch_ct()
     mvprintw(16, (_screenX / 2) - 7, "_______________");
     mvprintw(15, (_screenX / 2) - 9, "|");
     mvprintw(15, (_screenX / 2) + 9, "|");
+    if (_nbAttemptsCT)
+        mvprintw(_historyY - 1, (_screenX / 2) - 20, "|    Type    |  Puissance  |  Précision  |");
     get_input_ct();
 }
 
@@ -82,7 +84,7 @@ void Interface::print_suggestions_ct(const std::string guess)
     bool same;
 
     for (int i = start_y; i < CT_COUNT; i++)
-        mvprintw(i, 0, "                    ");
+        mvprintw(i, 0, "               ");
     if (!guess.empty()) {
         for (const auto& ctName : CtNames) {
             same = true;
@@ -102,10 +104,44 @@ void Interface::print_suggestions_ct(const std::string guess)
 
 void Interface::get_answer_ct(const std::string guess)
 {
-    for(size_t i = 0; i < CT_COUNT; i++) {
-        if (CtNames[i] == guess) {
-            if (i == _dailyCT)
-                mvprintw(0, 0, "congrats!");
+    int i = 0;
+    bool isValid = false;
+
+    for(; i < CT_COUNT - 1 && !isValid; i++) {
+        if (transformStr(CtNames[i]) == guess) {
+            isValid = true;
+            // VICTORY CONDITION
+            // if (i == _dailyCT) {
+            //     mvprintw(0, 0, "congrats!");
+            //     return;
+            // }
+            break;
+        }
+    }
+    if (isValid) {
+        bool isCopy = false;
+        for (int j = 0; j < _nbAttemptsCT && !isCopy; j++) {
+            if (_listAttempsCT[j] == i) {
+                isCopy = true;
+                break;
+            }
+        }
+        if (!isCopy) {
+            _nbAttemptsCT++;
+            _listAttempsCT[_nbAttemptsCT - 1] = i;
+            move(1, 0);//debug
+            clrtoeol();//debug
+            mvprintw(1, 1, ("Nuh uh " + std::to_string(_nbAttemptsCT)).c_str());//debug
+            for (int j = 0; j < _nbAttemptsCT; j++) {
+                int y = _historyY + _nbAttemptsCT;
+                int x = (_screenX / 2) - 20;
+                move(y, x);
+                clrtoeol();
+                mvprintw(y, x, "| %s", CtTypes[_listAttempsCT[j]].c_str());
+                mvprintw(y, x + 13, "| %s", std::to_string(CtPower[_listAttempsCT[j]]).c_str());
+                mvprintw(y, x + 13 + 14, "| %s", std::to_string(CtAccuracy[_listAttempsCT[j]]).c_str());
+                mvprintw(y, x + 13 + 14 + 14, "|");
+            }
         }
     }
 }

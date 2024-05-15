@@ -36,11 +36,14 @@ class Interface {
         bool _inMenu;
         int _set;
         int _dailyCT;
+        int _nbAttemptsCT;
+        std::array<int, CT_COUNT> _listAttempsCT;
 
     protected:
         int _cursor;
         int _screenY;
         int _screenX;
+        int _historyY;
 
 };
 

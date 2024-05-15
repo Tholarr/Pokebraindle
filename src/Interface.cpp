@@ -24,6 +24,8 @@ Interface::Interface()
     _set = -1;
 
     _dailyCT = 5;
+    _nbAttemptsCT = 0;
+    _historyY = 19;
 }
 
 Interface::~Interface()
