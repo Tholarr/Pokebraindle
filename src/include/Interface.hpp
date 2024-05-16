@@ -13,6 +13,7 @@
 #include <vector>
 #include <locale>
 #include <codecvt>
+#include <fstream>
 #include "Ct.hpp"
 
 class Interface {
@@ -30,6 +31,7 @@ class Interface {
         std::string transformStr(const std::string& str);
         void get_answer_ct(const std::string guess);
         void print_clues_ct(const int i);
+        void save_score_ct();
 
         void launch_obj();
         void launch_att();

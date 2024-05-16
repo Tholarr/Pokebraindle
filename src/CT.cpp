@@ -108,14 +108,14 @@ void Interface::get_answer_ct(const std::string guess)
     bool isValid = false;
 
     for(; i < CT_COUNT - 1 && !isValid; i++) {
-        if (transformStr(CtNames[i]) == guess) {
+        if (transformStr(CtNames[i]) == transformStr(guess)) {
             isValid = true;
             // VICTORY CONDITION
-            // if (i == _dailyCT) {
-            //     mvprintw(0, 0, "congrats!");
-            //     return;
-            // }
-            break;
+            if (i == _dailyCT) {
+                save_score_ct();
+                exit(0);
+                // return;
+            }
         }
     }
     if (isValid)
@@ -125,7 +125,7 @@ void Interface::get_answer_ct(const std::string guess)
         for (int j = 0; j < CT_COUNT - 1; j++) {
             same = true;
             for (i = 0; guess[i]; i++) {
-                if (transformStr(CtNames[j])[i] != guess[i]) {
+                if (transformStr(CtNames[j])[i] != transformStr(guess)[i]) {
                     same = false;
                     break;
                 }
@@ -206,4 +206,27 @@ void Interface::print_clues_ct(const int i)
             mvprintw(y, x + 13 + 14 + 14, "|");
         }
     }
+}
+
+void Interface::save_score_ct()
+{
+    std::ofstream file("db/ctSave.xml", std::ios::trunc);
+
+    if (!file.is_open())
+        std::cerr << "File error: open." << std::endl;
+
+    file << "<" << "document" << ">" << std::endl;
+    file << "\t" << "<header title=\"CT Save\">" << std::endl;
+    file << "\t\t" << "<date>" << "EXAMPLE 2024-01-01 EXAMPLE" << "</date>" << std::endl;
+    file << "\t" << "</header>" << std::endl;
+
+    file << "\t" << "<body>" << std::endl;
+    file << "\t\t" << "<paragraph>" << _nbAttemptsCT + 1 << "</paragraph>" << std::endl;
+    file << "\t\t" << "<list>" << std::endl;
+        // loop and print each attemps informations (in reverse order)
+    file << "\t\t" << "</list>" << std::endl;
+    file << "\t" << "</body>" << std::endl;
+    file << "</" << "document" << ">" << std::endl;
+
+    file.close();
 }
